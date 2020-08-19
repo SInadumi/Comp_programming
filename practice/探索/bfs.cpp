@@ -1,7 +1,7 @@
 // ABC 196 D
 #include <bits/stdc++.h>
 using namespace std;
-using Graph = vector<vector<int> >;
+using Graph = vector<vector<int>>;
 int N, M;
 Graph G;
 
