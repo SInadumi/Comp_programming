@@ -21,6 +21,7 @@
                 "'${workspaceFolder}\\problem.exe'`",
                 "`wslpath",
                 "'${file}'`",
+                "-std=c++17",
             ],
             "group": {
                 "kind": "build",
