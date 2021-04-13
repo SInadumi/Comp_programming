@@ -16,9 +16,15 @@ typedef pair<ll,ll> P;
 template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 
-int main() {
-    cin.tie(0);
-    ios_base::sync_with_stdio(false);
-    
+int main(void){
+    int n; cin >> n;
+    vector<int> x(n);
+    REP(i,n) cin >> x[i];
+    int p = round((long double)accumulate(ALL(x),0)/x.size());
+    long double sum = 0;
+    REP(i,n){
+        sum += pow((p-x[i]),2);
+    }
+    cout << sum << endl;
     return 0;
 }

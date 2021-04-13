@@ -16,9 +16,10 @@ typedef pair<ll,ll> P;
 template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 
-int main() {
-    cin.tie(0);
-    ios_base::sync_with_stdio(false);
-    
+int main(void){
+    ll n,k; cin >> n >> k;
+    int ans = 1;
+    while(n >= k) ans ++, n /= k;
+    cout << ans << endl;
     return 0;
 }
