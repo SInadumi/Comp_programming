@@ -9,7 +9,7 @@
                     "executable": "C:\\Windows\\System32\\wsl.exe",
                 }
             },
-            "command": "g++",
+            "command": "g++-9",
             "args": [
                 "-std=gnu++1y",
                 "-g",
@@ -22,6 +22,9 @@
                 "`wslpath",
                 "'${file}'`",
                 "-std=c++17",
+            ],
+            "problemMatcher": [
+                "$gcc"
             ],
             "group": {
                 "kind": "build",

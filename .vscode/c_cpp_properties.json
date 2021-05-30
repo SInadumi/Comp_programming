@@ -3,9 +3,9 @@
       {
         "name": "WSL",
         "intelliSenseMode": "gcc-x64",
-        "compilerPath": "/usr/bin/gcc",
+        "compilerPath": "/usr/bin/gcc-9",
         "includePath": ["${workspaceFolder}/**",
-                        "C:\\cygwin64\\usr\\include"],
+                        "/usr/include/**"],
         "defines": [],
         "cStandard": "c11",
         "cppStandard": "c++17"
