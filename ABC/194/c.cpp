@@ -6,6 +6,7 @@ typedef pair<ll,ll> P;
 #define FOR(i,a,b) for(int i=(a);i<(b);++i)
 #define EFOR(i,a,b) for(int i=(a);i<=(b);++i)
 #define REP(i, n) FOR(i,0,n)
+#define FORE(i,I) for(const auto &(i):(I))
 #define INF 1000000000
 #define MOD 1000000007
 ll power(ll x, ll y, ll mod = MOD){
@@ -16,18 +17,34 @@ ll power(ll x, ll y, ll mod = MOD){
 }
 
 int main(void){
-    ll n,ans = 0,sum1 = 0,sum2 = 0; cin >> n;
-    int first = 0;
-    REP(i,n){
-        int a;
-        cin >> a;
-        if(i == 0) sum1 = (ll)pow(a,2),sum2 = a;
-        else{
-            ans += i*(ll)pow(a,2) - 2*a*sum2 + sum1;
-            sum1 += (ll)pow(a,2);
-            sum2 += a;
+    int n; cin >> n;
+    vector<int> a(n);
+    REP(i,n) cin >> a[i];
+    map<int,int> t;
+    REP(i,n) t[a[i]]++;
+    ll ans = 0;
+    FORE(i, t){
+        FORE(j, t){
+            if(i.first <= j.first) continue;
+            ans += (1LL) * i.second * j.second * (ll)pow((j.first - i.first), 2);
         }
     }
     cout << ans << endl;
-    return 0;
 }
+
+// int main(void){
+//     ll n,ans = 0,sum1 = 0,sum2 = 0; cin >> n;
+//     int first = 0;
+//     REP(i,n){
+//         int a;
+//         cin >> a;
+//         if(i == 0) sum1 = (ll)pow(a,2),sum2 = a;
+//         else{
+//             ans += i*(ll)pow(a,2) - 2*a*sum2 + sum1;
+//             sum1 += (ll)pow(a,2);
+//             sum2 += a;
+//         }
+//     }
+//     cout << ans << endl;
+//     return 0;
+// }
