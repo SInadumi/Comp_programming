@@ -19,18 +19,9 @@ template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } 
 int main() {
     cin.tie(0);
     ios_base::sync_with_stdio(false);
-    int n; cin >> n;
-    vector<ll> x(n),y(n);
-    REP(i,n) cin >> x[i] >> y[i];
-    ll ans = 0;
-    REP(i,n){
-        FOR(j,i+1,n){
-            FOR(k,j+1,n){
-                ll dx1= x[j] - x[i], dx2= x[k] - x[i], dy1 = y[j] - y[i], dy2 = y[k] - y[i];
-                if(dy1 * dx2 != dy2 * dx1) ans++;
-            }
-        }
-    }
-    cout << ans << endl;
+    vector<int> t(3);
+    REP(i,3) cin >> t[i];
+    sort(ALL(t));
+    cout << t[1] << endl;
     return 0;
 }

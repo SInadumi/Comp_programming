@@ -15,22 +15,34 @@ typedef pair<ll,ll> P;
 #define endl '\n'
 template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
+int n; 
+bool solve(vector<ll> &h, vector<ll> &s, ll x){
+    bool ret = true;
+    // x以下で割るための制限時間
+    vector<ll> limit(n,0);
+    REP(i,n){
+        if(h[i] > x) return false;
+        limit[i] = (x-h[i])/s[i];
+    }
+    sort(ALL(limit));
+    REP(i,n){
+        if(limit[i] < i) ret = false;
+    }
+    return ret;
+}
 
 int main() {
     cin.tie(0);
     ios_base::sync_with_stdio(false);
-    int n; cin >> n;
-    vector<ll> x(n),y(n);
-    REP(i,n) cin >> x[i] >> y[i];
-    ll ans = 0;
-    REP(i,n){
-        FOR(j,i+1,n){
-            FOR(k,j+1,n){
-                ll dx1= x[j] - x[i], dx2= x[k] - x[i], dy1 = y[j] - y[i], dy2 = y[k] - y[i];
-                if(dy1 * dx2 != dy2 * dx1) ans++;
-            }
-        }
+    cin >> n;
+    vector<ll> h(n),s(n),limit(n,0);
+    REP(i,n) cin >> h[i] >> s[i];
+    ll l = 0, r = INF64;
+    while(r-l > 1){
+        ll mid = (r + l)/2;
+        if(solve(h, s, mid)) r = mid;
+        else l = mid;
     }
-    cout << ans << endl;
+    cout << r << endl;
     return 0;
 }

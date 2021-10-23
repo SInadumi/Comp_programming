@@ -20,16 +20,16 @@ int main() {
     cin.tie(0);
     ios_base::sync_with_stdio(false);
     int n; cin >> n;
-    vector<ll> x(n),y(n);
-    REP(i,n) cin >> x[i] >> y[i];
-    ll ans = 0;
+    vector<ll> a(n);
+    REP(i,n) cin >> a[i];
+    map<ll,ll> mp;
+    int ans = 0;
+    sort(ALL(a), greater<>());
     REP(i,n){
-        FOR(j,i+1,n){
-            FOR(k,j+1,n){
-                ll dx1= x[j] - x[i], dx2= x[k] - x[i], dy1 = y[j] - y[i], dy2 = y[k] - y[i];
-                if(dy1 * dx2 != dy2 * dx1) ans++;
-            }
+        while(a[i]%2 == 0){
+            a[i] /= 2;
         }
+        if(mp.count(a[i]) == 0) mp[a[i]] = 1, ans++;
     }
     cout << ans << endl;
     return 0;
