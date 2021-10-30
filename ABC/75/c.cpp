@@ -46,10 +46,25 @@ struct UnionFind{
     }
 };
 
-
 int main() {
     cin.tie(0);
     ios_base::sync_with_stdio(false);
-    
+    int n,m; cin >> n >> m;
+    vector<int> a(m), b(m);
+    int ans = 0;
+    REP(i,m){
+        cin >> a[i] >> b[i];
+        a[i]--;
+        b[i]--;
+    }
+    REP(i,m){
+        UnionFind g(n);
+        REP(j,m){
+            if(i == j) continue;
+            g.unite(a[j], b[j]);
+        }
+        if(!g.same(a[i], b[i])) ans++;
+    }
+    cout << ans << endl;
     return 0;
 }

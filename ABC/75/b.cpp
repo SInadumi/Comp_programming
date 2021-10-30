@@ -15,41 +15,29 @@ typedef pair<ll,ll> P;
 #define endl '\n'
 template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
-
-struct UnionFind{
-    // p[i] : iの親
-    vector<ll> p;
-    // 集合のサイズ
-    vector<ll> sz;
-    // 要素数
-    ll n;
-    UnionFind(ll _n) : n(_n),p(_n),sz(_n,1){
-        REP(i,n) p[i] = i;
-    }
-    ll root(ll x){
-        if(p[x] == x) return x;
-        return p[x] = root(p[x]);
-    }
-    void unite(ll x, ll y){
-        x = root(x), y = root(y);
-        if(x == y) return;
-        if(sz[x] < sz[y]) swap(x,y); // conj y to x
-        sz[x] += sz[y];
-        p[y] = x;
-    }
-    bool same(ll x, ll y){
-        x = root(x), y = root(y);
-        return x == y;
-    }
-    ll size(ll x){
-        return sz[root(x)];
-    }
-};
-
-
+int dh[8] = {0,0,1,1,1,-1,-1,-1};
+int dw[8] = {1,-1,0,1,-1,0,1,-1};
 int main() {
     cin.tie(0);
     ios_base::sync_with_stdio(false);
-    
+    int h,w; cin >> h >> w;
+    vector<string> s(h);
+    REP(i,h) cin >> s[i];
+    REP(i,h){
+        REP(j,w){
+            int ans = 0;
+            if(s[i][j] == '#'){
+                cout << '#';
+                continue;
+            }
+            REP(k,8){
+                int vh = i + dh[k], vw = j + dw[k];
+                if(vh < 0 || vw < 0 || vh >= h || vw >= w) continue;
+                if(s[vh][vw] == '#') ans++;
+            }
+            cout << ans;
+        }
+        cout << endl;
+    }
     return 0;
 }
