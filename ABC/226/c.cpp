@@ -15,31 +15,36 @@ typedef pair<ll,ll> P;
 #define endl '\n'
 template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
-const ll n = 1048576;
-int solve(vector<ll> &p, int j){
-    if(p[j] == j) return j;
-    else{
-        p[j] = solve(p, p[j]);
-        return p[j];
-    }
-}
 
 int main() {
     cin.tie(0);
     ios_base::sync_with_stdio(false);
-    ll q; cin >> q;
-    vector<ll> a(n, -1);
-    vector<ll> p(n);
-    iota(ALL(p), 0);
-    REP(i,q){
-        int t; ll x; cin >> t >> x;
-        if(t == 1){
-            int j = solve(p, x % n);
-            a[j] = x;
-            p[j] = solve(p, (j + 1) % n);
-        }else{
-            cout << a[x%n] << endl;
+    int n; cin >> n;
+    vector<vector<int>> g(n);
+    vector<int> t(n), dist(n,0);
+    queue<int> q;
+    REP(i,n){
+        int k; cin >> t[i] >> k;
+        vector<int> tmp(k);
+        REP(j,k){
+            cin >> tmp[j];
+            tmp[j]--;
+        }
+        g[i] = tmp;
+    }
+    q.push(n-1);
+    dist[n-1] = 1;
+    ll cost = t[n-1];
+    while(!q.empty()){
+        int v = q.front();
+        q.pop();
+        FORE(i, g[v]){
+            if(dist[i]) continue;
+            dist[i] = 1;
+            cost += t[i];
+            q.push(i);
         }
     }
+    cout << cost << endl;
     return 0;
 }

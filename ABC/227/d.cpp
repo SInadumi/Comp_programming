@@ -15,31 +15,21 @@ typedef pair<ll,ll> P;
 #define endl '\n'
 template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
-const ll n = 1048576;
-int solve(vector<ll> &p, int j){
-    if(p[j] == j) return j;
-    else{
-        p[j] = solve(p, p[j]);
-        return p[j];
-    }
-}
 
 int main() {
     cin.tie(0);
     ios_base::sync_with_stdio(false);
-    ll q; cin >> q;
-    vector<ll> a(n, -1);
-    vector<ll> p(n);
-    iota(ALL(p), 0);
-    REP(i,q){
-        int t; ll x; cin >> t >> x;
-        if(t == 1){
-            int j = solve(p, x % n);
-            a[j] = x;
-            p[j] = solve(p, (j + 1) % n);
-        }else{
-            cout << a[x%n] << endl;
-        }
+    ll n,k; cin >> n >> k;
+    vector<ll> a(n);
+    REP(i,n) cin >> a[i];
+    ll l = 0, r = INF64 / k;
+    while(r-l > 1){
+        ll mid = (r + l)/2;
+        ll sum = 0;
+        REP(i,n) sum += min(mid, a[i]);
+        if(sum < mid * k) r = mid;
+        else l = mid;
     }
+    cout << l << endl;
     return 0;
 }
